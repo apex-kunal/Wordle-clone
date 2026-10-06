@@ -27,7 +27,7 @@ function scoreGuess(secret,guess){
   const marks = new Array(5).fill("absent"); //  an array of 5 empty boxes assuming 
   const counts = countLetter(secret);
 
-  // pass 1 
+  // pass 1 marking correct for correst words and position 
   for(let i = 0; i < 5; i++){ 
     if(guess[i] === secret[i]){ // if guess is correct then 
       marks[i] = "correct"; // if guess is correct then replace "absent " with "correct" in that specific index
@@ -35,24 +35,31 @@ function scoreGuess(secret,guess){
     }
   }
 
-  // pass 2
+  // pass 2 for checking and marking the remaining absent after pass 1 "present" if the guess has the word which the secret also have but in different position  
   for(let i = 0; i < 5; i++){
-    if(marks[i] === "absent" && counts[guess[i]] > 0){
-      marks[i] = "present";
-      counts[guess[i]] -= 1;
+    if(marks[i] === "absent" && counts[guess[i]] > 0){ // now check the postion that were left absent and whose count is now greater than 0
+      marks[i] = "present"; // mark them present
+      counts[guess[i]] -= 1; // then decrease the count 
     }
   }
 
-     
-
-  return marks;
+  // restructuring guess[] and marks[]
+  const result = []
+  for(let i = 0; i < 5; i++){
+    result.push({letter: guess[i], mark: marks[i]});
+  }
+  return result;
 }
+console.log(scoreGuess("SNAKE", "SNAKE"));
+/* test case 1
+console.log(scoreGuess("SNAKE", "SNAKE"));  -> passed OK
+test case 2
+console.log(scoreGuess("SNAKE", "ABCDE"));  -> passed OK
+test case 3
+console.log(scoreGuess("SNAKE", "EERIE"));  -> paased OK
+test case 4
+console.log(scoreGuess("APPLE", "PAPER"));  -> passed OK
+test case 5
+console.log(scoreGuess("ALLEY","LLAMA"))  -> passed OK */
 
-// test case 1
-console.log(scoreGuess("SNAKE", "SNAKE")); // -> passed OK
-// test case 2
-console.log(scoreGuess("SNAKE", "ABCDE")); // -> passed OK
-// test case 3
-console.log(scoreGuess("SNAKE", "EERIE")); // -> paased OK
-// test case 4
-console.log(scoreGuess("APPLE", "PAPER")); // -> passed OK
+
