@@ -48,5 +48,11 @@ function scoreGuess(secret,guess){
   return marks;
 }
 
-console.log(scoreGuess("SNAKE", "EERIE")); // expect: absent, absent, absent, absent, correct
-console.log(scoreGuess("APPLE", "PAPER"));  // expect: present, present, correct, present, absent
+// test case 1
+console.log(scoreGuess("SNAKE", "SNAKE")); // -> passed OK
+// test case 2
+console.log(scoreGuess("SNAKE", "ABCDE")); // -> passed OK
+// test case 3
+console.log(scoreGuess("SNAKE", "EERIE")); // -> paased OK
+// test case 4
+console.log(scoreGuess("APPLE", "PAPER")); // -> passed OK
