@@ -1,10 +1,3 @@
-// core logic goes here 
-
-// function to noramlize a word
-function normalize(word){
-  return String(word).trim().toUpperCase() 
-}
-
 function countLetter(word){
   const letterCount = {} // empty object to hold the letter
 
@@ -37,8 +30,8 @@ function scoreGuess(secret,guess){
 
   // pass 2
   for(let i = 0; i < 5; i++){
-    if(marks[i] === "absent" && counts[guess[i]] > 0){
-      marks[i] = "present";
+    if(mark[i] === "absent" && counts[guess[i]] > 0){
+      mark[i] = "present";
       counts[guess[i]] -= 1;
     }
   }
